@@ -12,10 +12,11 @@ class Solution:
             if self.isScramble(s1[ :i], s2[-i: ]) & self.isScramble(s1[i: ], s2[ :-i]):
                 return True
         return False
+
 if __name__ == "__main__":
-    # s1 = 'abced'
-    # s2 = 'caebd'
-    s1 = 'abcdefghijklmn'
-    s2 = 'efghijklmncadb'
+    s1 = 'abced'
+    s2 = 'caebd'
+    # s1 = 'abcdefghijklmn'
+    # s2 = 'efghijklmncadb'
     so = Solution()
     print(so.isScramble(s1,s2))

@@ -1,7 +1,7 @@
 # import numpy as np
 class Solution:
 
-    def calMaxsubseq(ss, ind,start=0, pos):
+    def calMaxsubseq(self,ss, ind,start=0, pos):
 
         for i in range(start, ind):
             itv = i + 1
@@ -31,7 +31,7 @@ class Solution:
         maxLen = 0
 
         for i, x in enumerate(ss):
-            if i > maxRight:
+            if i < maxRight:
                 j = 2*pos - i
                 rightEgde = maxRight - i
                 

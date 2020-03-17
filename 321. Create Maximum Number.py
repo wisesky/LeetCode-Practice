@@ -6,7 +6,7 @@ class Solution:
         :type k: int
         :rtype: List[int]
         """
-        # 返回nums中保留k项的最大list
+    
         def prep(nums, k):
             dr = len(nums) - k  # 要删除的数目
             stay = []  # 保留的list

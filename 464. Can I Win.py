@@ -23,3 +23,8 @@ class Solution:
                 return True
         self.memo[hash] = False
         return False
+
+
+if __name__ == "__main__":
+    so = Solution()
+    print(so.canIWin(10, 11))

@@ -16,3 +16,7 @@ class Solution:
         
         r = res(n,1)*9 + 1
         return r
+
+if __name__ == "__main__":
+    so = Solution()
+    print(so.countNumbersWithUniqueDigits(3))

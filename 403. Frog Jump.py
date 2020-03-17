@@ -1,5 +1,8 @@
 class Solution:
     def canCross(self, stones):
+        # 此题的关键是： 
+        # deset 记录并更新可以到达当前石头的之前起点石头序号
+        # ntoidx   石头位置：石头序号
         deset = {i:set() for i in range(len(stones))}
         ntoidx = {n:i for i,n in enumerate(stones)}
         deset[1].add(1)

@@ -28,3 +28,17 @@ class Solution:
             for y in x:
                 r = max(r, y)
         return r**2
+
+if __name__ == "__main__":
+    
+    matrix = [
+        [1,0,1,0,0],
+        [1,0,1,1,1],
+        [1,1,1,1,1],
+        [1,0,0,1,0],
+    ]
+
+    matrix = [[str(z) for z in y] for y in matrix]
+
+    so = Solution()
+    print(so.maximalSquare(matrix))

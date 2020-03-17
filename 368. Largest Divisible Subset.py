@@ -33,3 +33,8 @@ class Solution:
             index = mark[index]
 
         return msubs
+
+if __name__ == "__main__":
+    so = Solution()
+    nums = [1,2,3,4]
+    print(so.largestDivisibleSubset(nums))

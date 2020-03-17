@@ -10,7 +10,8 @@ class Solution:
                 if nums[j] < num:
                     if v < dp[j] + 1:
                         seqTo[i] = j
-                    v = max(v, dp[j] + 1)
+                        v = dp[j] + 1
+                    # v = max(v, dp[j] + 1)
                     
             dp[i] = v
         print(dp)
