@@ -39,18 +39,24 @@ class Solution:
             left = (x, y-1) if y > 0 else None
             right = (x, y+1) if y < w-1 else None
 
-            if up != None and not visited.get(up, False):
-                heapq.heappush(pq, (heightMap[up[0]][up[1]], up))
-                visited[up] = True
-            if down!= None and not visited.get(down, False):
-                heapq.heappush(pq, (heightMap[down[0]][down[1]], down))
-                visited[down] = True
-            if left != None and not visited.get(left, False):
-                heapq.heappush(pq, (heightMap[left[0]][left[1]], left))
-                visited[left] = True
-            if right != None and not visited.get(right, False):
-                heapq.heappush(pq, (heightMap[right[0]][right[1]], right))
-                visited[right] = True
+            # if up != None and not visited.get(up, False):
+            #     heapq.heappush(pq, (heightMap[up[0]][up[1]], up))
+            #     visited[up] = True
+            # if down!= None and not visited.get(down, False):
+            #     heapq.heappush(pq, (heightMap[down[0]][down[1]], down))
+            #     visited[down] = True
+            # if left != None and not visited.get(left, False):
+            #     heapq.heappush(pq, (heightMap[left[0]][left[1]], left))
+            #     visited[left] = True
+            # if right != None and not visited.get(right, False):
+            #     heapq.heappush(pq, (heightMap[right[0]][right[1]], right))
+            #     visited[right] = True
+
+            # optimization
+            for rd in [up, down, left, right]:
+                if rd != None and not visited.get(rd, False):
+                    heapq.heappush(pq, (heightMap[rd[0]][rd[1]], rd))
+                    visited[rd] = True
 
         return res
 
