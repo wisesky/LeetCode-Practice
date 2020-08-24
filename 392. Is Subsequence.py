@@ -5,6 +5,7 @@ class Solution:
         :type t: str
         :rtype: bool
         """
+        # whether s in t as subseq
         st = 0
         for x in s :
             idx = t[st: ].find(x)

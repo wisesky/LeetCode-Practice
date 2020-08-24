@@ -1,5 +1,6 @@
 from typing import List
 class Solution:
+    # unlimited transactions
     def maxProfit(self, prices: List[int]) -> int:
         if len(prices) == 0:
             return 0

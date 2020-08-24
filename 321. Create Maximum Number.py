@@ -29,7 +29,7 @@ class Solution:
         r = [0]
         for i in range(k + 1):
             # 遍历所有可能并比较大小
-            if i >= k - l2 and i <= l1:
+            if i <= l1 and  k-i <= l2:
                 r = max(merge(prep(nums1, i), prep(nums2, k - i)), r)
         return r
 

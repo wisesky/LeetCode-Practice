@@ -22,6 +22,7 @@ class Solution:
                     elif dp[i][j] >= min(br[i][j], bc[i][j]):
                         dp[i+1][j+1] = min(br[i][j], bc[i][j])
                     else:
+                        # print('other case : 1')
                         dp[i+1][j+1] = 1
         r = 0
         for x in dp:

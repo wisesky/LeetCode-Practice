@@ -18,7 +18,6 @@ class Solution:
             if mark[i] != -1:
                 continue
             
-            
             for j in range(i):
                 if nums[i] % nums[j] == 0:
                     if count[i] < count[j] + 1 :

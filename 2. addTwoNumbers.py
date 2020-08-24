@@ -6,6 +6,7 @@
 
 from ListNode import ListNode
 class Solution:
+    # linknode 组成的数字相加 ,而且还是逆序的 234 : 4->3->2
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         x = l1
         y = l2

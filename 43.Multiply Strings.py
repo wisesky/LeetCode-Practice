@@ -31,7 +31,7 @@ if __name__ == "__main__":
     so = Solution()
     num1 = '123'
     num2 = '456'
-    num2 = '0'
+    # num2 = '0'
     res = so.multiply(num1, num2)
     print(res)
                 

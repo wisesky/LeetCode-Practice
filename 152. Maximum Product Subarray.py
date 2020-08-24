@@ -8,7 +8,7 @@ class Solution:
         ma = []
         mi = []
         for i, num in enumerate(nums):
-            if i is 0:
+            if i == 0:
                 ma.append(num)
                 mi.append(num)
                 continue

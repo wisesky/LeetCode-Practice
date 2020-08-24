@@ -15,7 +15,7 @@ class Solution:
         #     for i in range(2, len(nums)):
         #         dp[i] = max(dp[i-2] + nums[i], dp[i-1])
         #     return dp[-1]
-        return max(dp(nums[1: ]), dp(nums[ :-1]))
+        return max(Solution.dp(nums[1: ]), Solution.dp(nums[ :-1]))
 
     @staticmethod
     def dp(nums):    

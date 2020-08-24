@@ -15,7 +15,7 @@ class Solution:
         #         dp[i][j] = dp[i-1][j] + ( (1 + dp[i][j-nums[i-1]]) if j >= nums[i-1] else 0 )
                 
         # return dp[len(nums)][target]
-        # 组合情况:
+        # 排列情况: #   对于满足 j>=nums[i-1]的所有j: dp[i] = sum(dp[i-1][j] +  dp[i][j-nums[i-1]]) )
         dp = [0 for _ in range(target+1)]
         dp[0] = 1
         for i in range(1, target+1):

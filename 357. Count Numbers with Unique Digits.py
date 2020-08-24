@@ -9,7 +9,7 @@ class Solution:
                 return 0
             if n == idx :
                 return 1
-            if n < idx:
+            if n < idx :
                 return 0
             
             return (1 + (10-idx)*res(n,idx+1))
