@@ -3,7 +3,7 @@ def cut8(chars):
     if length < 8:
         fills = 8 - length
         r = chars + '0'*fills
-        return [r]
+        # return [r]
 
     res = []
     for i in range(0,length, 8):

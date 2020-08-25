@@ -88,7 +88,7 @@ for line in sys.stdin:
         error += 1
         continue
     #  127.*.*.*  ==> True '' 
-    if len(binary_ip) == 0:
+    if len(binary_ip) == 0: # maybe len(binary_ip) < 32
         continue
 
     res = ipMask2Subnet(binary_ip, binary_mask)
@@ -110,7 +110,7 @@ for line in sys.stdin:
     elif r in range(240, 256):
         e += 1
     else:
-        error += 1
+        # error += 1
         continue
 
     if isPrivateIp(res):

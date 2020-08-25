@@ -4,7 +4,7 @@ def reverse(line):
     reverse_words = words[ : :-1]
     cor_reverse_words = [x  if len(x)<20 else x[ :20] for x in reverse_words]
     output = ' '.join(cor_reverse_words)
-    return output.stirp()
+    return output.strip()
 
 while True:
     try:

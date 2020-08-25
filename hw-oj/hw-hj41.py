@@ -20,5 +20,6 @@ while True:
 
         result = len(res)
         print(result)
+        print(res)
     except:
         break
