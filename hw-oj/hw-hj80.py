@@ -34,7 +34,7 @@ while True:
                 if x not in r:
                     r.append(x)
                 i += 1
-                y += 1
+                j += 1
         
         output = ''.join([str(x) for x in r])
         print(output)

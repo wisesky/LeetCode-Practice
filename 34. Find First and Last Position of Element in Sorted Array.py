@@ -14,6 +14,8 @@ class Solution:
             elif nums[mid] < target:
                 st = mid+1
             else:
+                # leftSearch 在nums[0:mid-1]寻找左边界，如果没有那么左边界就是mid
+                # 同上
                 leftEdge = self.leftSearch(nums, 0, mid-1, target)
                 rightEdge = self.rightSearch(nums, mid+1, len(nums)-1, target)
                 return [leftEdge if leftEdge!=-1 else mid, rightEdge if rightEdge!=-1 else mid]
