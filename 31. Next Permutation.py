@@ -7,9 +7,18 @@ class Solution:
         if len(nums) == 0 or len(nums) == 1:
             return
 
-        for i in range(len(nums)-2, -1, -1):
-            if nums[i] < nums[i+1]:
+        # 找到nums[i] < max(nums[i+1: ])
+        # s1
+        # for i in range(len(nums)-2, -1, -1):
+        #     if nums[i] < nums[i+1]:
+        #         break
+        # s2
+        leftMax = float('-inf')
+        for i in range(len(nums)-1, -1,-1):
+            if nums[i] < leftMax:
                 break
+            else:
+                leftMax = nums[i]
 
         if i == 0 and nums[i] >= nums[i+1]:
             nums.reverse()
