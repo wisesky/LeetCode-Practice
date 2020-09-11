@@ -1,5 +1,6 @@
 import math
 
+# 搜索n的 在l的index, 如果没有跟n一样的值，输出l应该插入的位置
 def biSearch(l, n):
     lo = 0
     hi = len(l)-1
@@ -16,5 +17,5 @@ def biSearch(l, n):
         else:
             return mid
     # 这里犯错了，在lo 》 hi的情况下跳出循环，但是mid并没有更新，所以要重新计算mid再return
-    # return lo # 貌似也可以
-    return math.ceil((lo + hi) / 2)
+    # return math.ceil((lo + hi) / 2)
+    return lo # 貌似也可以
