@@ -1,6 +1,10 @@
 from typing import List
+
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
+    def search(self, nums: List[int], target: int) -> bool:
+        return self.searchHelper(nums, target) != -1
+
+    def searchHelper(self, nums: List[int], target: int) -> int:
         if len(nums) == 0 :
             return -1
         
@@ -10,7 +14,7 @@ class Solution:
 
         while st <= ed:
             mid = (st+ed) // 2
-            print(st, mid, ed)
+            # print(st, mid, ed)
             if nums[st] < target:
                 if nums[mid] < nums[st]:
                     # st mid
@@ -87,8 +91,9 @@ class Solution:
 if __name__ == "__main__":
     so = Solution()
     # nums = [4,5,6,7,0,1,2]
-    nums = [1]
+    # nums = [1]
     # nums = [8,9,2,3,4]
     # nums = [0,0,0,0,0,1,2,3]
-    res = so.search(nums, 0)  
+    nums = [1,3,1,1,1]
+    res = so.search(nums, 3)  
     print(res)
