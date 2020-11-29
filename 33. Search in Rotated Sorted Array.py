@@ -86,8 +86,8 @@ class Solution:
 
 if __name__ == "__main__":
     so = Solution()
-    # nums = [4,5,6,7,0,1,2]
-    nums = [1]
+    nums = [4,5,6,7,0,1,2]
+    # nums = [1]
     # nums = [8,9,2,3,4]
     # nums = [0,0,0,0,0,1,2,3]
     res = so.search(nums, 0)  

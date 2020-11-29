@@ -1,7 +1,7 @@
 class Solution:
     def canCross(self, stones):
         # 此题的关键是： 
-        # deset 记录并更新可以到达当前石头的之前起点石头序号
+        # deset 记录并更新可以到达当前石头的之前jump 距离
         # ntoidx   石头位置：石头序号
         deset = {i:set() for i in range(len(stones))}
         ntoidx = {n:i for i,n in enumerate(stones)}
@@ -21,7 +21,7 @@ class Solution:
                     deset[ntoidx[de1]].add(j+1)
                 if de0 in nextJump:
                     deset[ntoidx[de0]].add(j-1)
-        if deset[len(stones)-1] == set():
+        if len( deset[len(stones)-1] )== 0:
             return False
         return True
 if __name__ == "__main__":

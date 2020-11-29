@@ -12,7 +12,7 @@ class Solution:
 if __name__ == "__main__":
     nums = [1,2,0]
     nums = [3,4,-1,1]
-    # nums = [7,8,9,11,12]
+    nums = [7,8,9,11,12]
     so = Solution()
     res = so.firstMissingPositive(nums)
     print(res)

@@ -4,7 +4,7 @@ from collections import deque
 class Solution:
     def canReach(self, arr: List[int], start: int) -> bool:
         l = len(arr)
-        dests = {}
+        dests = {} # 如果 起点i 可以到达 终点j : dests[j] = i
         ends = []
         for i,v in enumerate(arr):
             # dest = [i+x for x in [v,-v] if i+x in range(l)]

@@ -2,7 +2,7 @@ from typing import List
 
 class Solution:
     def search(self, nums: List[int], target: int) -> bool:
-        return self.searchHelper(nums, target) != -1
+        return self.searchHelper_1(nums, target)
 
     def searchHelper(self, nums: List[int], target: int) -> int:
         if len(nums) == 0 :
@@ -62,32 +62,34 @@ class Solution:
 
         return -1
 
-    def search_1(self, nums, target):
+    def searchHelper_1(self, nums: List[int], target: int) -> int:
         if len(nums) == 0 :
-            return -1
+            return False
         
         st =0
         ed = len(nums)-1
-        # mid = (st+ed) // 2
-
         while st <= ed:
             mid = (st+ed) // 2
-            print(st, mid, ed)
-            if nums[mid] < target:
-                if nums[st] > target:
-                    # mid ed
-                    st = mid+1
-                elif nums[st] < target:
-                    # mid
-                    pass
-            elif nums[mid] > target:
-                # st mid
-                ed = mid-1
-            else:
-                return mid
+            if nums[mid] == target :
+                return True
 
-        return -1
-
+            # left sorted
+            if nums[st] < nums[mid]:
+                if target >= nums[st] and target < nums[mid]:
+                    ed = mid - 1
+                else:
+                    st = mid + 1
+            elif nums[st] == nums[mid]:
+                st += 1
+            # right sorted
+            else :# nums[mid] < nums[ed]
+                if target > nums[mid] and target <= nums[ed]:
+                    st = mid + 1
+                else:
+                    ed = mid - 1 
+                    
+        return False
+        
 if __name__ == "__main__":
     so = Solution()
     # nums = [4,5,6,7,0,1,2]
