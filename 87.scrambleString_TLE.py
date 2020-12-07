@@ -22,5 +22,5 @@ if __name__ == "__main__":
     # s = 'great'
     s = "abcdefghijklmn"
     result = scramble(s, d)
-    print("efghijklmncadb" in result)
-    # print(result)
+    # print("efghijklmncadb" in result)
+    print(result)

@@ -59,12 +59,12 @@ def preOrder(root):
 if __name__ == "__main__":
     # l = [1,2,3,None,4,None,5]
     l = [1,2,3,None,4,None,5]
-    l = [1]
+    # l = [1]
     root = initTree(1,l)
-    # preOrder(root)
+    preOrder(root)
 
-    so = Solution()
-    reslult = so.rob(root)
-    print(reslult)
+    # so = Solution()
+    # reslult = so.rob(root)
+    # print(reslult)
 
 
