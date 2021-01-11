@@ -51,39 +51,39 @@ class Solution:
         length = len(s)
         memo = [[0]*length for _ in range(length)]
         dp = self.longestPalindrome(s)
-        # self.calLength(0, s, dp, memo)
-        # return memo[0][-1] - 1
-        dp_2 = self.calLength(s, dp)
-        return dp_2[0][-1]
+        self.calLength(0, s, dp, memo)
+        return memo[0][-1] - 1
+        # dp_2 = self.calLength(s, dp)
+        # return dp_2[0][-1]
 
-    # s2-1 自顶向下 备忘录dp 456ms
-    # def calLength(self, start, s, dp, memo):
-    #     if start == len(s):
-    #         return 0
-    #     if start == len(s)-1:
-    #         memo[start][len(s)-1] = 1
-    #         return 1
-    #     if dp[start][len(s)-1]:
-    #         memo[start][len(s)-1] = 1
-    #         return 1
-    #     if memo[start][len(s)-1] != 0:
-    #         return memo[start][len(s)-1]
+    # s2-1 自顶向下 备忘录dp AC 456ms
+    def calLength(self, start, s, dp, memo):
+        if start == len(s):
+            return 0
+        if start == len(s)-1:
+            memo[start][len(s)-1] = 1
+            return 1
+        if dp[start][len(s)-1]:
+            memo[start][len(s)-1] = 1
+            return 1
+        if memo[start][len(s)-1] != 0:
+            return memo[start][len(s)-1]
 
-    #     res = float('inf')
-    #     for i in range(start, len(s)):
-    #         if dp[start][i] :
-    #             res = min(res, self.calLength(i+1, s, dp , memo))
-    #     memo[start][len(s)-1] = res + 1
-    #     return memo[start][len(s)-1]
+        res = float('inf')
+        for i in range(start, len(s)):
+            if dp[start][i] :
+                res = min(res, self.calLength(i+1, s, dp , memo))
+        memo[start][len(s)-1] = res + 1
+        return memo[start][len(s)-1]
 
     # s2-2 自底向上 dp TLE 
     def calLength(self, s, dp ):
         length = len(s)
         dp_2 = [[0]*length for _ in range(length)]
-        # if dp[0][length-1]:
-        #     dp_2[0][-1] = 0
-        #     return dp_2
-
+        if dp[0][length-1]:
+            dp_2[0][-1] = 0
+            return dp_2
+        # s1 gap dp
         for gap in range(1, length):
             for i in range(length-gap):
                 j = i+gap
@@ -96,6 +96,7 @@ class Solution:
 
         return dp_2
 
+    # dp 求substring 上三角是否是 回文字符 AC 456ms
     def longestPalindrome(self, s):
         length = len(s)
         dp = [[False]*length for _ in range(length)]
@@ -108,14 +109,44 @@ class Solution:
 
         return dp
 
+    # 普通 O(N**2) 解法 AC 568ms
+    def longestPalindrome(self, s):
+        length = len(s)
+        d = [[False]*length for _ in range(length)]
+
+        news = '_'.join(s)
+        for i in range(len(news)):
+            d[i//2][i//2] = True
+            end = min(i, len(news)-i)
+            flag = True
+            for j in range(1,end+1):
+                pre = i-j
+                post = i+j
+                
+                if news[pre] != '_' and  flag:
+                    if  news[pre] == news[post]:
+                        d[pre//2][post//2] = True
+                    else:
+                        flag = False
+
+        return d
+
+
+
 s = 'aab'
 s = 'a'
 # s = 'ab'
-s = "ababababababababababababcbabababababababababababa"
+# s = "ababababababababababababcbabababababababababababa"
 # s = 'aaabaa'
 # s = 'leet'
 s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 so = Solution()
 r = so.minCut(s)
-# r = so.isPalindrome(s, {})
 print(r)
+# r1 = so.longestPalindrome(s)
+# r2 = so.longestPalindrome_1(s)
+# for r in r1:
+#     print(r)
+# print('*'*30)
+# for r in r2:
+#     print(r)
