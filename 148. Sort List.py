@@ -92,6 +92,62 @@ class Solution:
         tail.next = l1 or l2
         return root.next
 
+    # buttom up merget
+    def getSize(self, head):
+        count = 0
+        while head:
+            count += 1
+            head = head.next
+        return count
+
+    def splitLink(self, head, size):
+        cur = head
+        for _ in range(size):
+            if not cur:
+                break
+            cur = cur.next
+        if not cur:
+            return None
+        next_start = cur.next
+        cur.next = None
+        return next_start
+
+    def mergeSort_bottomup(self, l1, l2, pre_tail):
+        cur = pre_tail
+        while l1 and l2:
+            if l1.val<l2.val:
+                cur.next = l1
+                l1 = l1.next
+            else:
+                cur.next = l2
+                l2 = l2.next
+            cur = cur.next
+        cur.next = l1 or l2
+        while cur.next:
+            cur = cur.next
+        return cur
+
+    # bottom up sort
+    def sortList(self, head: ListNode) -> ListNode:
+        if head == None or head.next == None:
+            return head
+
+        length = self.getSize(head)
+        root = ListNode()
+        root.next = head
+        # pre_tail = None
+        start = None
+        size = 1
+        while size < length:
+            pre_tail = root
+            start = pre_tail.next
+            while start:
+                left = start
+                right = self.splitLink(left, size)
+                start = self.splitLink(right, size)
+                pre_tail = self.mergeSort_bottomup(left, right,pre_tail)
+            size *= 2
+        return root.next
 
 def initNodes(nums):
     root = ListNode()
@@ -114,5 +170,6 @@ root = initNodes(nums)
 # printNodes(root)
 
 so = Solution()
+# root = so.sortList(root)
 root = so.sortList(root)
 printNodes(root)

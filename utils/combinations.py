@@ -1,4 +1,7 @@
+from itertools import permutations
+
 # basic algs idea
+
 def combinations(iterable, r):
     pool = tuple(iterable)
     n = len(pool)

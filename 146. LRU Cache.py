@@ -88,6 +88,67 @@ class LRUCache:
             
         return
 
+class BiListNode:
+    def __init__(self, key=None, value=None):
+        self.key = key
+        self.value = value
+        self.pre = None
+        self.next = None
+
+class LRUCache_Bi:
+    def __init__(self, capacity) :
+        self.capacity = capacity
+        self.size = 0
+        self.hash = dict()
+        self.head = BiListNode()
+        self.tail = BiListNode()
+        self.head.pre, self.head.next = None, self.tail
+        self.tail.pre, self.tail.next = self.head, None
+
+    def get(self, key):
+        value = -1
+        if key in self.hash:
+            node = self.hash[key]
+            value = node.value
+            self.remove_node(node)
+            self.add_to_head(node)
+        return value
+    
+    def put(self, key, value):
+        if self.capacity == 0:
+            return
+        if key in self.hash:
+            node = self.hash[key]
+            self.remove_node(node)
+            self.add_to_head(node)
+            node.value = value
+            return
+        if self.size == self.capacity:
+            node = self.tail.pre
+            self.remove_node(node)
+
+        newNode = BiListNode(key, value)
+        self.add_to_head(newNode)
+        return
+
+    def add_to_head(self, node):
+        post = self.head.next
+        post.pre = node
+        node.next = post
+        self.head.next = node
+        node.pre = self.head
+        self.hash[node.key] = node
+        self.size += 1
+        return
+
+    def remove_node(self, node):
+        pre, post = node.pre, node.next
+        pre.next, post.pre = post, pre
+        self.hash.pop(node.key)
+        self.size -= 1
+        return
+    
+
 def printNode(root):
     print('*'*20)
     cur = root.next
@@ -99,7 +160,7 @@ def printNode(root):
 
 
 capacity = 3
-obj = LRUCache(capacity)
+obj = LRUCache_Bi(capacity)
 obj.put(1,1)
 obj.put(2,2)
 obj.put(3,3)

@@ -35,16 +35,38 @@ class Solution:
 
         return sum_candy
 
+    # s2 全部变成上坡
+    def candy_1(self, ratings: List[int]) -> int:
+        length = len(ratings)
+        if length == 0:
+            return 0
+
+        candys = [1]*length
+        pre = ratings[0]
+        for i in range(1, length):
+            cur = ratings[i]
+            if cur > pre:
+                candys[i] = candys[i-1]+1
+            pre = cur
+
+        post = ratings[-1]
+        for j in range(length-2,-1,-1):
+            cur = ratings[j]
+            if cur > post and candys[j] <= candys[j+1]:
+                candys[j] = candys[j+1] + 1
+            post = cur
+        return sum(candys)
 
 ratings = [1,0,2]
 ratings = [1,2,2]
 ratings = [1,3,2,1]
 # ratings = [1,3,2,2,1]
-# ratings = [1,2,87,88,87,4,3,2,1]
+ratings = [1,2,87,88,87,4,3,2,1]
 # ratings = [1,3,4,5,2]
 # ratings = [0,1,2,5,3,2,7]
 
 so = Solution()
 
 res = so.candy(ratings)
+res = so.candy_1(ratings)
 print(res)
