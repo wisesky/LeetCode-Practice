@@ -55,6 +55,10 @@
 #
 from typing import List
 # @lc code=start
+"""
+Time: 8.6s (18%)
+Memory: 14.6 MB (40%)
+"""
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
       height = len(board)
@@ -96,29 +100,32 @@ class Solution:
         (x+1,y) # down
       ]
       candidate2 = char2pos.get(word[0], None)
+      marked[x,y] = True
       if candidate2 == None:
         return False
-      for i,j in candidate2:
-        if (i,j) not in candidate1:
-          continue
-        val = board[i][j]
+      c1 = set(candidate1)
+      c2 = set(candidate2)
+      c = c1.intersection(c2)
+      for i,j in c:
         if marked.get((i,j), False):
           continue
-        if val == word[0]:
-          marked[x,y] = True
-          flag = self.findWord(board,marked,char2pos, i,j,word[1: ]) 
+        # val = board[i][j]
+        # if val == word[0]:
+        
+        flag = self.findWord(board,marked,char2pos, i,j,word[1: ]) 
+        if flag:
           marked[x,y] = False
-          if flag:
-            return True
+          return True
+      marked[x,y] = False
       return False
 # @lc code=end
 if __name__ == "__main__":
   board = [["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]]
-  words = ["oa","oaa"]
-  board = [["a","a"]]
-  words = ["aaa"]
-  board = [["a","b"]]
-  words = ["ab"]
+  words = ["oa","oaa",'oao']
+  # board = [["a","a"]]
+  # words = ["aaa"]
+  # board = [["a","b"]]
+  # words = ["ab"]
   so = Solution()
   r = so.findWords(board, words)
   print(r)

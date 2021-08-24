@@ -39,8 +39,30 @@
 
 # @lc code=start
 class Solution:
+    """
+    996 ms(6%) 14.7 MB(60%)
+    shortest palindrome 的关键是 找到以 s[0] 为左边界
+    的回文字符串的最长中心点 centor 
+
+    扩展后的字符串 news 的中心点位置 i 恰好 等于回文字符串的长度-1
+    """
     def shortestPalindrome(self, s: str) -> str:
-        l = []
-        l.pop( )
+        news = '_'.join(s)     
+        long = 0
+        for i in range(len(news)):
+            pre = news[ :i]
+            post = news[i+1:2*i+1][::-1]
+            if pre == post:
+                long = i
+        rest = s[long+1: ][::-1]
+        return rest + s
+
+
+
 # @lc code=end
 
+so = Solution()
+
+s = 'aacecaaa'
+s = 'abcd'
+print(so.shortestPalindrome(s))

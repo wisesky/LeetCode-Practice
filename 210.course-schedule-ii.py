@@ -76,46 +76,30 @@ class Solution:
         s2t = {}
         t2s = {}
         marked = {}
-        # inStack = {}
+        onStack = {}
         res = {}
         for t,s in prerequisites:
+            onStack[s] = False
             if s in s2t:
                 s2t[s].append(t)
             else:
                 s2t[s] = [t]
             if t in t2s:
-                t2s[t].append(t)
+                t2s[t].append(s)
             else:
                 t2s[t] = [s]
 
-        starts = []
+        self.post = []
+        self.cycle = False
         for i in range(numCourses):
             if i not in marked:
-                res = self.dfs(i, t2s, marked)
-                starts.extend(res)
-                
-        # result = []
-        # for start in starts:
-        #     res = self.bfs(start, s2t)
-        #     result.extend(res)
-        # return result
-        # return self.bfs(starts, s2t)
-        cur = starts
-        # post = []
-        result = []
-        while len(cur) > 0:
-            res = []
-            for c in cur:
-                res.extend(s2t.get(c, []))
+                self.dfs(i, t2s, marked, onStack)
+                if self.cycle:
+                    return []
+    
+        # self.post.reverse()
+        return self.post
 
-            for r in res:
-                if r in cur:
-                    cur.remove(r) 
-            result.extend(cur)
-        
-            cur = list(set(res))
-            # post = []
-        return result
     # BFS
     def bfs(self, starts, s2t):
         # q = [start]
@@ -134,31 +118,37 @@ class Solution:
                     res.append(nextCourse)
         return res
 
-    def dfs(self, course, s2t, marked):
+    def dfs(self, course, t2s, marked, onStack):
+        """
+        reverse post order => Topo sort
+        这里 由于是 t2s ，所以相当于就是 reverse， post order即可
+        """
         marked[course] = True
-        preCourses = s2t.get(course, [])
-        if len(preCourses) == 0:
-            return [course]
-        
-        r = []
-        for preCourse in preCourses:
+        onStack[course] = True
+        for preCourse in t2s.get(course,[]):
+            if self.cycle:
+                return
             if preCourse not in marked:
-                tmp = self.dfs(preCourse, s2t, marked)
-                r.extend(tmp)
+                self.dfs(preCourse, t2s, marked,onStack)
+            elif onStack[preCourse]:
+                self.cycle = True
+        
+        self.post.append(course)
+        onStack[course] = False
+        
 
-        return  list(set(r))
 # @lc code=end
 
 if __name__ == "__main__":
     num = 2
-    pre = [[1,0]]
+    pre = [[1,0], [0,1]]
     # pre = [[0,1]]
-    num = 4
-    pre = [[1,0],[2,0],[3,1],[3,2]]
-    num = 3
-    # pre = [[2,0],[2,1]]
-    # pre = [[0,1],[0,2],[1,2]]
-    pre = [[1,0],[1,2],[0,1]]
+    # num = 4
+    # pre = [[1,0],[2,0],[3,1],[3,2]]
+    # num = 3
+    # # pre = [[2,0],[2,1]]
+    # # pre = [[0,1],[0,2],[1,2]]
+    # pre = [[1,0],[1,2],[0,1]]
     so = Solution()
     r = so.findOrder(num, pre)
     print(r)

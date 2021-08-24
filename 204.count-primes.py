@@ -51,34 +51,26 @@
 import math
 class Solution:
     def countPrimes(self, n: int) -> int:
-        if n <= 2:
+        if n < 2:
             return 0
-        marked = set()
-        count = 1
-        marked.add(2)
-        for i in range(3, n, 2):
-            if self.isPrime(i, marked):
-                count += 1
-        # return len(marked)
-        return count
+        marked = [1] * n
+        marked[0] = 0
+        marked[1] = 0
+        # marked[2] = 1
+        for i in range(2, n):
+            if marked[i] == 1:
+                c = 2
+                while c*i < n:
+                    marked[c*i] = 0
+                    c += 1
+        return sum(marked) 
 
-    def isPrime(self, x, marked):
-        if x == 0 or x == 1:
-            return False
-        sx = x**0.5
-        ceil = math.ceil(sx)
-        ceil = x if ceil >= x else ceil+1
-        for i in range(3, ceil,2):
-            if i in marked and x % i == 0:
-                return False
-        
-        marked.add(x)
-        return True
 # @lc code=end
 
 if __name__ == "__main__":
     n = 1500000
     # n = 5000000
+    n = 10
     so = Solution()
     r = so.countPrimes(n)
     print(r)
