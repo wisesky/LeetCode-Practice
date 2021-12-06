@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../algs4/algs4-github/algs4"
 		}
 	],
 	"settings": {}
