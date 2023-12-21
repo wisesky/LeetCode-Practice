@@ -1,6 +1,6 @@
 # Input: S = "ADOBECODEBANC", T = "ABC"
 # Output: "BANC"
-from collections import Counter
+from collections import Counter, defaultdict
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
@@ -32,10 +32,43 @@ class Solution:
         if minLen != float('inf'):
             return s[minStart:minStart+minLen+1] # minStart+minLen = minEnd 是枚举中实际可以访问的idx，作为索引则要+1
         return ''
-
+    
+    # 双指针滑动窗口法， 本质和上一段代码相同，用更容易理解的方法重写一遍
+    def slideWindows(self, s, t):
+        need = Counter(t)
+        windows = defaultdict(lambda : 0)
+        # 记录 need 中，字符是否满足数量需求的char 数目
+        valids = 0
+        # 左边指针left 初始化
+        left = 0
+        # 记录结果的指针 start 和 有效长度
+        start, length = 0, float('inf')
+        
+        # 右指针循环，开始扩大窗口
+        for right, char in enumerate(s):
+            if char in need :
+                windows[char] += 1
+                if windows[char] == need[char]:
+                    valids += 1
+            # 左指针循环，缩小窗口
+            while valids == len(need):
+                if right - left < length :
+                    length = right - left
+                    start = left
+                if s[left] in need:
+                    if windows[s[left]] == need[s[left]]:
+                        valids -= 1
+                    windows[s[left]] -= 1
+                left += 1
+        
+        return "" if length is None else s[start:start+length+1]
+    
 if __name__=='__main__':
     so = Solution()
     S = "ADOBECODEBANC"
     T = "ABC"
     res = so.minWindow(S, T)
+    res_1 = so.slideWindows(S, T)
     print(res)
+    print('-'*10)
+    print(res_1)

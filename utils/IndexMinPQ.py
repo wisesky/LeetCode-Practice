@@ -1,3 +1,13 @@
+#! python3
+# -*- encoding: utf-8 -*-
+'''
+@File   : IndexMinPQ.py
+@Time   : 2021/12/27 18:44:43
+@Author : Franklin Chen
+@Contact: wisesky1988@gmail.com
+@Licence: MIT License
+@Desc   : 
+'''
 class IndexMinPQ:
     """
     IndexMinPQ API came from algs4: priority queue -> IndexMinPQ
@@ -8,7 +18,7 @@ class IndexMinPQ:
             so father_index == son_index // 2
                 left_son_index = father_index * 2
                 right_son_index = left_son_index + 1
-        a little similar sortedDict but sorted by value
+        somewhat similar sortedDict but sorted by value
         data relationship:
             index(heap) <==> key --> val
         
@@ -72,7 +82,7 @@ class IndexMinPQ:
         """
         original minIndex in algs4(Java)
         but I think heap index <==> key --> val 
-         will be more clear
+         may be more clear
         """
         min_index = 1
         return self.index2key[min_index]
@@ -131,7 +141,7 @@ class IndexMinPQ:
 # index version prirority queue basic operation
     def swim(self, i):
         """
-        i ==> index_i
+        i : index_i
         """
         # i // 2 > 0 <==> i > 1
         while i // 2 > 0 and  self.greater(i//2, i):
@@ -140,7 +150,7 @@ class IndexMinPQ:
 
     def sink(self, i):
         """
-        i ==> index_i
+        i : index_i
         """
         while 2*i <= self.n :
             son = 2*i
@@ -153,7 +163,7 @@ class IndexMinPQ:
 
     def greater(self, i, j):
         """
-        i,j ==> index_i, index_j
+        i,j : index_i, index_j
         compare val[key_i] with val[key_j]
         """
         key_i = self.index2key[i]

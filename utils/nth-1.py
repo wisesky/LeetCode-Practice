@@ -19,7 +19,7 @@ class Solution:
                 u3 = 3 * r[i3]
             if umin == u5:
                 i5 += 1
-                u5 = 2 * r[i5]
+                u5 = 5 * r[i5]
             
             n -= 1
         return r[-1]
