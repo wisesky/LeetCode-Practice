@@ -10,6 +10,8 @@
 '''
 from collections import Counter, defaultdict
 class Solution:
+    # 滑动窗口双指针法：
+    # 同 567
     def findAnagrams(self, s: str, p: str) :
         need = Counter(p)
         valids = 0
@@ -31,8 +33,7 @@ class Solution:
                 if valids == len(need) :
                     # return True
                     res.append(left)
-                lc = s[left]
-                if lc in need:
+                lc = s[left]                if lc in need:
                     if windows[lc] == need[lc]:
                         valids -= 1
                 windows[lc] -= 1
