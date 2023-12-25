@@ -12,6 +12,7 @@ from collections import Counter, defaultdict
     # 滑动窗口双指针法：
     # 同 567
 class Solution:
+    # 滑动窗口法
     def findAnagrams(self, s: str, p: str) :
         need = Counter(p)
         valids = 0

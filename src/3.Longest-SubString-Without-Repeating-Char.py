@@ -30,6 +30,7 @@ class Solution:
     # Trick Solution: 通过记录每个字符 crt 之前出现过的位置 c2idx: character -> last seen
     # 这样left = max(目前为止，所有出现过的字符的 last seen)
     # 实际上是一个更加优化版本的滑动窗口
+    # The function iterates through the string "s", updating the "left" pointer and "res" as it finds non-repeating substrings.
     def lengthOfLongestSubstring_2(self, s: str):
         length = len(s)
         if length == 0:
