@@ -98,6 +98,43 @@ class Solution:
         if char == '0':
             return False
         return char.startswith('0')
+    # 另一个时候做题，想起了完全一样的解题思路的代码
+    def isAdditiveNumber(self, num: str) -> bool:
+        self.flag = False
+        for i in range(1,len(num)):
+            for j in range(i+1, len(num)):
+                # 排除 p1 == ‘0x'的情况
+                if num[0] == '0' and i >1 :
+                    continue
+                # 排除 p2 == '0x' 的情况
+                if num[i]=='0'and j-i>1:
+                    continue
+                p1 = int(num[ :i])
+                p2 = int(num[i:j])
+                self.cut(p1, p2, num[j: ])
+                if self.flag :
+                    return True
+        return False
+        # pre1 + pre2 == num[ :x]
+    def cut(self, p1, p2, reserved):
+        # print(f'now p1: {p1}, p2:{p2}')
+        if len(reserved) == 0:
+            self.flag = True
+            # print(f'last p1: {p1}, p2:{p2}')
+            return
+        p_str = str(p1 + p2)
+        # zip 函数自动挑选最短的，如果 reserved 太短，则说明不匹配
+        if len(p_str) > len(reserved):
+            return
+        # 匹配对应字符
+        for l, r in zip(p_str, reserved):
+            if l != r:
+                return
+        new_p1 = p2
+        new_p2 = int(reserved[ :len(p_str)])
+        self.cut(new_p1,new_p2, reserved[len(p_str): ])
+        return
+# @lc code=end
 
 # @lc code=end
 
